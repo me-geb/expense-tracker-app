@@ -6,7 +6,7 @@ import '../utils/formatters.dart';
 
 class AddExpenseScreen extends StatefulWidget {
   final Expense? expense;
-  
+
   const AddExpenseScreen({super.key, this.expense});
 
   @override
@@ -41,8 +41,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   }
 
   void _submitExpense() {
-    final enteredAmount = double.tryParse(_amountController.text) ?? 
-                          double.tryParse(_amountController.text.replaceAll(',', '.'));
+    final enteredAmount = double.tryParse(_amountController.text) ??
+        double.tryParse(_amountController.text.replaceAll(',', '.'));
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
 
     print('Title: ${_titleController.text}');
@@ -103,7 +103,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   @override
   Widget build(BuildContext context) {
     final isEditing = widget.expense != null;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text(isEditing ? 'Edit Expense' : 'Add New Expense'),
@@ -125,7 +125,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                   Expanded(
                     child: TextField(
                       controller: _amountController,
-                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
                       decoration: const InputDecoration(
                         prefixText: '\$ ',
                         label: Text('Amount'),
@@ -173,6 +174,12 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     },
                   ),
                   const Spacer(),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
