@@ -9,22 +9,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:expense_tracker_app/main.dart';
+import 'package:expense_tracker_app/src/repositories/expense_repository.dart';
+import 'package:expense_tracker_app/src/models/expense.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('App renders smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    final repository = FakeExpenseRepository();
+    await tester.pumpWidget(MyApp(repository: repository));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify that the app title is present (or just that it builds without crashing).
+    expect(find.byType(MaterialApp), findsOneWidget);
   });
+}
+
+class FakeExpenseRepository implements ExpenseRepository {
+  @override
+  Future<List<Expense>> loadExpenses() async => [];
+
+  @override
+  Future<void> saveExpense(Expense expense) async {}
+
+  @override
+  Future<void> deleteExpense(String id) async {}
 }
