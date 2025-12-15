@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:expense_tracker_app/models/category.dart';
 import 'package:expense_tracker_app/models/expense.dart';
 import 'package:expense_tracker_app/repositories/expense_repository.dart';
-import 'package:flutter/foundation.dart';
 
 part 'expense_list_event.dart';
 part 'expense_list_state.dart';
